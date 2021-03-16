@@ -8,28 +8,18 @@ import "./App.css";
 
 class App extends Component {
     constructor(props) {
-        super(props);
-
+        super(props)
         this.state = {
-            todos: [
-                {
-                    id:uuid(),
-                    title: "Take out the trash",
-                    complete: false,
-                },
-                {
-                    id: uuid(),
-                    title: "Dinner Tonight",
-                    complete: false,
-                },
-                {
-                    id: uuid(),
-                    title: "Meeting Console",
-                    complete: false,
-                },
-            ],
-        };
+            todos: []
+        }
     }
+    componentDidMount(){
+        const listItems = JSON.parse(localStorage.getItem('list-items'))
+         this.setState( () =>   ({todos : listItems})  )
+     }
+     componentDidUpdate() {
+         localStorage.setItem("list-items", JSON.stringify(this.state.todos));
+     }
     markComplete = (id) => {
         this.setState({
             todos: this.state.todos.map((todo) => {
@@ -69,19 +59,19 @@ class App extends Component {
        
     };
     render() {
-        return (
-            <div className="App">
-                <div className="container">
-                    <Header />
-                    <Addtodo
-                        todos={this.state.todos}
-                        addTodo={this.addTodo}
-                        markComplete={this.markComplete}
-                        delTodo={this.delTodo}
-                    />
-                </div>
-            </div>
-        );
+         return (
+               <div className="App">
+                   <div className="container">
+                       <Header />
+                       <Addtodo
+                           todos={this.state.todos}
+                           addTodo={this.addTodo}
+                           markComplete={this.markComplete}
+                           delTodo={this.delTodo}
+                       />
+                   </div>
+               </div>
+           );
     }
 }
 

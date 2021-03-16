@@ -23,7 +23,6 @@ import Todos from './Todos'
      handleSubmit = (e) => {
          
          const item = this.state.title;
-         console.log(typeof(item))
          e.preventDefault();
          if (item.length <= 0 || item.trim().length === 0 || item === "") {
              return false;
