@@ -8,31 +8,28 @@ import Todos from './Todos'
          eID : null
      };
      editTodo = (id, title) => {
-         this.setState({
+         this.setState(() => ({
              editMode: true,
              title: title,
              eID : id
-         });
+         }));
      };
 
      addItem = (e) => {
-         this.setState({
+         this.setState(() =>({
              title: e.target.value,
-         });
+         }));
      };
      handleSubmit = (e) => {
          
          const item = this.state.title;
          e.preventDefault();
-         if (item.length <= 0 || item.trim().length === 0 || item === "") {
-             return false;
-         } else {
-             this.props.addTodo(this.state.title, this.state.editMode, this.state.eID);
-             this.setState({
-                 editMode : false
-             })
-         }
-
+         if (item.length > 0 || item.trim().length !== 0 || item !== "") {
+            this.props.addTodo(this.state.title, this.state.editMode, this.state.eID);
+             this.setState((prevState) => ({
+                 editMode : prevState.editMode = false
+             }))
+         } 
          this.setState({ title: "" });
      };
      render() {
