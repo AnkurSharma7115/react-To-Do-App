@@ -12,12 +12,15 @@ import React, { Component } from 'react'
          }
      }
     render() {
-        const {id, title} = this.props.todo
+        const {id, title, complete} = this.props.todo
         return (
             <div style={this.getStyle()}> 
                 <p>
-                <input type = "checkbox" onChange ={this.props.markComplete.bind(this, id)}/>
+                <label>
+                <input type = "checkbox" checked = {complete} onChange ={this.props.markComplete.bind(this, id)}/>
                  {''} {title}
+                </label>
+               
                  
                  <button onClick = {this.props.delTodo.bind(this,id)} style = {delBtn}>x</button>
                  <button onClick = {this.props.editTodo.bind(this,id,title)} style={editBtn}>Edit</button>
